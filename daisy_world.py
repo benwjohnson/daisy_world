@@ -22,3 +22,4 @@ Ab = 0.3 #Albedo
 emiss=0.996
 k_to_c = 273
 #hey guys, hope your Monday is going well :)
+#Bean is throwing up a lot, not sure why. Keep my rug in your thoughts as I clean it everyday. 
