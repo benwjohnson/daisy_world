@@ -21,3 +21,5 @@ Lo = 3.846e26 #luminosity of the Sun, W
 Ab = 0.3 #Albedo
 emiss=0.996
 k_to_c = 273
+
+#Michelle is testing
