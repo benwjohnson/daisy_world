@@ -19,13 +19,13 @@ def model(z,t,C,D):
     x=z[0]
     y=z[1]
     k = -0.3
-    dxdt = k*(-C+x)
+    dxdt = k*(-C+x)**2
     dydt = k-D*y
     
     return [dxdt, dydt]
 
 # initial condition
-z0 = [1,1]
+z0 = [10,.1]
 # time points
 t = np.linspace(0,10)
 #t = [0,5,10]
