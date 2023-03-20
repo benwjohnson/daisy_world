@@ -22,6 +22,7 @@ Lo = 3.846e26 #luminosity of the Sun, W
 Ab = 0.3 #Albedo
 emiss=0.996
 k_to_c = 273
+S= 917 #Solar flux constant
 
 
 #%% Equations
@@ -51,3 +52,18 @@ o= math.sqrt(math.sqrt(h))
 Te= o - 273
 print(Te)
 
+#%%
+'''
+f= total radiation lost to space
+q=SL/stef_boltz
+q=0, local temp = mean temp. meaning perfect conuction from high to lower temp. 
+'''
+F= (stef_boltz)*(Te+273)**4
+print(F)
+#%%
+'''
+q= solar energy that is absorbed and distributed to ground, black, and white daises.
+q= SLo/ setf_boltz
+'''
+q= (S*Lo)/stef_boltz
+print(q)
