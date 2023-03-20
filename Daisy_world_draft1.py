@@ -25,6 +25,7 @@ k_to_c = 273
 S= 917 #Solar flux constant
 
 
+
 #%% Equations
 '''
 Equations for comparative growth of daisies
@@ -43,15 +44,56 @@ Locat T1 is 1 when local T is 22.5C
 
 Te= sqrt.(4)(SLo-(1-Ab))/stef_bltz - 273
 '''
+
+def dw_model(z,t,Lo,Ab,stef_boltz):
+    aw=z[0] #starting area for white daisies
+    ab=z[1] #starting area for black daisies
+    
+    p = 1
+    x_fertile = p - aw - ab
+    death_rate = 0.3
+    
+    numerator = Lo*(1-Ab)
+    denominator = 16*np.pi*d**2*stef_boltz
+    temp_eff = numerator/denominator
+    temp_eff = temp_eff**(1/4) 
+    print(temp_eff)
+   
+    #calculate growth rate
+    c1 = 0.003265
+    c2 = 22.5
+    growth_rate = 1 - c1*(c2-temp_eff-273)**2
+    print(growth_rate)
+    
+    #here are the differential equations
+    dwdt = aw*(x_fertile*growth_rate - death_rate)
+    dbdt = ab*(x_fertile*growth_rate - death_rate)
+    
+    return [dwdt, dbdt]
+
+#%% Attempt to run the code
+C = (Lo,Ab,stef_boltz)
+t = np.linspace(0,10,num=10)
+z0 = [0.5,0.5]
+
+fun = odeint(dw_model,z0,t,args=(Lo,Ab,stef_boltz))
+
+
 #%%Looking for the Te temperature 
 
-m=emiss*Lo*(1-Ab)
+m=S*Lo*(1-Ab)
 h= m/ stef_boltz
 o= math.sqrt(math.sqrt(h))
 
 Te= o - 273
 print(Te)
 
+#And the equation for effective temperature
+numerator = Lo*(1-Ab)
+denominator = 16*np.pi*d**2*stef_boltz
+temp_eff = numerator/denominator
+temp_eff = temp_eff**(1/4)
+print(temp_eff)
 #%%
 '''
 f= total radiation lost to space

@@ -27,8 +27,9 @@ def model(z,t,C,D):
 # initial condition
 z0 = [1,1]
 # time points
-t = np.linspace(0,10)
+t = np.linspace(0,10,num=25)
 #t = [0,5,10]
+
 # solve ODE
 z_solved = odeint(model,z0,t,args=(C1,C2))
 
