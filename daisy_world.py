@@ -22,7 +22,7 @@ Ab = 0.3 #Albedo
 emiss=0.996
 k_to_c = 273
 S = 917 #Solar Flux
-o = 5.670374419 × 10−8 #Stefan's constant 
+o = (5.670374419 * 10**-8) #Stefan's constant 
 
 '''
 ab = area covered by black daisies
@@ -40,4 +40,6 @@ comparative growth of daisies:
     dab/dt = ab(XB - y)
 Te = effective temperature planet radiates 
    o =  
+   
 '''
+
