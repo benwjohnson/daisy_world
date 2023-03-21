@@ -22,7 +22,8 @@ Ab = 0.3 #Albedo
 emiss=0.996
 k_to_c = 273
 S = 917 #Solar Flux
-o = (5.670374419 * 10**-8) #Stefan's constant 
+death = 0.3 #death rate
+
 
 '''
 ab = area covered by black daisies
@@ -33,7 +34,7 @@ P = proportion of planet that is fertile
 
 B = growth rate
 T1 = local temperature
-    B1 = 1-0.003265(22.5 - T1)^2
+    B1 = 1-0.003265(22.5 - T1)**2
 y = death rate
 comparative growth of daisies:
     daw/dt = aw(XB - y)
@@ -42,4 +43,39 @@ Te = effective temperature planet radiates
    o =  
    
 '''
+#local temperature calculation
 
+
+# function for differential equations
+def dw_model(z,t,C,D):
+    x=z[0]
+    y=z[1]
+    x_fertile = (p - ab - aw)
+    c1 = 0.003265
+    c2 = 22.5
+    p =1
+
+    growth = 1-c1(c2 - local_temp)**2
+    dwdt = aw(X*growth - death)
+    dbdt = ab(X*growth - death)
+    
+    return [dwdt, dbdt]
+
+
+# initial condition
+z0 = [1,1]
+# time points
+t = np.linspace(0,10)
+#t = [0,5,10]
+# solve ODE
+z_solved = odeint(model,z0,t,args=(C1,C2))
+
+x_out = z_solved[:,0]
+y_out = z_solved[:,1]
+# plot results
+plt.figure(num=1); plt.clf()
+plt.plot(t,x_out,'k-h')
+plt.plot(t,y_out,'r:o')
+plt.xlabel('time')
+plt.ylabel('y(t)')
+plt.show()
