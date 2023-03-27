@@ -64,9 +64,10 @@ def dw_model(z,t,C,D):
        #calculate growth rate
     growth_rate = 1 - c1*(c2-temp_eff-k_to_c)**2
     print(growth_rate)
-    dwdt = aw(X*growth - death)
-    dbdt = ab(X*growth - death)
-    
+    dwdt = aw(x_fertile*growth - death)
+    dbdt = ab(x_fertile*growth - death)
+    #radiation lost to space. Not sure where this is used??
+    F = stef_boltz(tem_eff + k_to_c)**4
     return [dwdt, dbdt]
 
 
