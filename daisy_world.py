@@ -54,7 +54,8 @@ def dw_model(z,t,C,D):
     c1 = 0.003265
     c2 = 22.5
     p =1
-
+    o = ((S*Lo)/((T1 + k_to_c)**4)/(1-A1))
+    Te = ((S*Lo(1-Ab))/o)**(1/4) + k_to_c
     growth = 1-c1(c2 - local_temp)**2
     dwdt = aw(X*growth - death)
     dbdt = ab(X*growth - death)
