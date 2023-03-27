@@ -70,6 +70,8 @@ def dw_model(z,t,C,D):
     F = stef_boltz(tem_eff + k_to_c)**4
     return [dwdt, dbdt]
 
+#Where does q come into play?
+
 
 # initial condition
 z0 = [1,1]
