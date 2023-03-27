@@ -40,7 +40,8 @@ comparative growth of daisies:
     daw/dt = aw(XB - y)
     dab/dt = ab(XB - y)
 Te = effective temperature planet radiates 
-   o =  
+
+F =  total radiation lost to space
    
 '''
 #local temperature calculation
@@ -48,15 +49,21 @@ Te = effective temperature planet radiates
 
 # function for differential equations
 def dw_model(z,t,C,D):
-    x=z[0]
-    y=z[1]
+    aw=z[0] #starting area for white daisies
+    ab=z[1] #starting area for black daisies
+    p = 1
     x_fertile = (p - ab - aw)
     c1 = 0.003265
     c2 = 22.5
-    p =1
-    o = ((S*Lo)/((T1 + k_to_c)**4)/(1-A1))
-    Te = ((S*Lo(1-Ab))/o)**(1/4) + k_to_c
-    growth = 1-c1(c2 - local_temp)**2
+    numerator = Lo*(1-Ab)
+    denominator = 16*np.pi*d**2*stef_boltz
+    temp_eff = numerator/denominator
+    temp_eff = temp_eff**(1/4) 
+    print(temp_eff)
+    
+       #calculate growth rate
+    growth_rate = 1 - c1*(c2-temp_eff-k_to_c)**2
+    print(growth_rate)
     dwdt = aw(X*growth - death)
     dbdt = ab(X*growth - death)
     
